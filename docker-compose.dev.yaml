@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: packages/server/Dockerfile
+      # Use the 'builder' stage which has all dev dependencies
+      target: builder
+    command: pnpm --filter server run start:dev
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=postgres
+      - JWT_SECRET=SUPER_SECRET_KEY
+    ports:
+      - "3001:3001"
+    volumes:
+      # Mount the entire monorepo for hot-reloading
+      - .:/usr/src/app
+      # Use anonymous volumes to prevent local node_modules from overwriting the container's
+      - /usr/src/app/node_modules
+      - /usr/src/app/packages/server/node_modules
+
+  client:
+    build:
+      context: .
+      dockerfile: packages/client/Dockerfile
+      # Use the 'builder' stage which has all dev dependencies
+      target: builder
+    command: pnpm --filter client run dev -- --host
+    ports:
+      - "3005:5173"
+    volumes:
+      # Mount the entire monorepo for hot-reloading
+      - .:/usr/src/app
+      # Use anonymous volumes to prevent local node_modules from overwriting the container's
+      - /usr/src/app/node_modules
+      - /usr/src/app/packages/client/node_modules
+
+  db:
+    ports:
+      - "5432:5432"

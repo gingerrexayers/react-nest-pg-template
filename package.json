@@ -1,0 +1,16 @@
+{
+  "name": "empower-interview-canvasser-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "build:server": "pnpm --filter server build",
+    "start:server": "node packages/server/dist/main",
+    "build:client": "pnpm --filter client build",
+    "serve:client": "pnpm --filter client preview"
+  },
+  "keywords": [],
+  "author": "Ginger Ayers",
+  "license": "ISC",
+  "packageManager": "pnpm@10.11.0"
+}
