@@ -3,7 +3,7 @@ declare global {
     interface Chainable {
       login(
         email?: string,
-        password?: string
+        password?: string,
       ): Chainable<{ token: string; email: string; password: string }>;
     }
   }

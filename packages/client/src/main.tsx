@@ -1,16 +1,21 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import "./index.css";
-import App from "./App.tsx";
-import { AuthProvider } from "./context/auth-context.tsx";
-import { ThemeProvider } from "./components/theme-provider";
-import { Toaster } from "sonner";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import './index.css';
+import { Toaster } from 'sonner';
+import App from './App.tsx';
+import { ThemeProvider } from './components/theme-provider';
+import { AuthProvider } from './context/auth-context.tsx';
 
 const queryClient = new QueryClient();
 
-createRoot(document.getElementById("root")!).render(
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Failed to find the root element');
+}
+
+createRoot(rootElement).render(
   <StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
@@ -22,5 +27,5 @@ createRoot(document.getElementById("root")!).render(
         </ThemeProvider>
       </QueryClientProvider>
     </BrowserRouter>
-  </StrictMode>
+  </StrictMode>,
 );

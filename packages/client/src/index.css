@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-
-
 /* This block maps CSS variables to Tailwind's theme tokens. No changes are needed here. */
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -63,9 +61,7 @@
   --muted: oklch(0.966 0.031 259.78); /* Light Blue: #F0F5FE */
   --muted-foreground: oklch(0.7 0 0); /* Neutral grey for placeholders */
   --accent: oklch(0.966 0.031 259.78); /* Light Blue: #F0F5FE */
-  --accent-foreground: oklch(
-    0.543 0.179 259.44
-  ); /* Empower Blue for text on accent */
+  --accent-foreground: oklch(0.543 0.179 259.44); /* Empower Blue for text on accent */
 
   /* Other UI states */
   --destructive: oklch(0.628 0.257 29.23); /* Standard Red: #FF0000 */
@@ -90,8 +86,6 @@
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
 }
-
-
 
 @layer base {
   * {

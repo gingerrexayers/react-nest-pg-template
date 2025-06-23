@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import Joi from 'joi';
-import { dataSourceOptions } from './data-source';
+import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
+import { dataSourceOptions } from './data-source';
 import { UsersModule } from './users/users.module';
 
 @Module({

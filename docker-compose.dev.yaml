@@ -13,9 +13,9 @@ services:
       - PORT=3001
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=postgres
-      - DB_DATABASE=postgres
+      - DB_USERNAME=postgres_user
+      - DB_PASSWORD=postgres_password
+      - DB_DATABASE=postgres_database
       - JWT_SECRET=SUPER_SECRET_KEY
     ports:
       - "3001:3001"

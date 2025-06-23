@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import type { User } from "@/types";
+import type { User } from '@/types';
+import { createContext } from 'react';
 
 export interface AuthContextType {
   isAuthenticated: boolean;
@@ -18,5 +18,5 @@ export interface JwtPayload {
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined
+  undefined,
 );

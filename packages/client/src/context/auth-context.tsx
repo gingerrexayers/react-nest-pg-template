@@ -1,27 +1,27 @@
+import type { User } from '@/types';
+import { jwtDecode } from 'jwt-decode';
 import {
-  useState,
-  useCallback,
-  useMemo,
   type ReactNode,
+  useCallback,
   useEffect,
-} from "react";
-import type { User } from "@/types";
-import { jwtDecode } from "jwt-decode";
-import { AuthContext, type JwtPayload } from "./auth";
+  useMemo,
+  useState,
+} from 'react';
+import { AuthContext, type JwtPayload } from './auth';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string | null>(() => {
     // Initialize token from localStorage synchronously
-    return localStorage.getItem("authToken");
+    return localStorage.getItem('authToken');
   });
 
   const logout = useCallback(() => {
-    localStorage.removeItem("authToken");
+    localStorage.removeItem('authToken');
     setToken(null);
   }, []);
 
   const login = useCallback((newToken: string) => {
-    localStorage.setItem("authToken", newToken);
+    localStorage.setItem('authToken', newToken);
     setToken(newToken);
   }, []);
 
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
       } catch (error) {
         // If the token is invalid or corrupted, log out
-        console.error("Invalid token found, logging out:", error);
+        console.error('Invalid token found, logging out:', error);
         logout();
       }
     }
@@ -54,8 +54,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // It prevents the app from crashing during render.
       // The useEffect hook below will then handle cleaning up the invalid token.
       console.error(
-        "Failed to decode token in user memo, treating as unauthenticated:",
-        error
+        'Failed to decode token in user memo, treating as unauthenticated:',
+        error,
       );
       return null;
     }

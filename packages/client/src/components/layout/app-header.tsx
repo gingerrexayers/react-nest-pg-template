@@ -1,8 +1,8 @@
-import { useAuth } from "@/hooks/use-auth";
-import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo_expanded.png";
-import favicon from "@/assets/favicon.png";
-import { cn } from "@/lib/utils";
+import favicon from '@/assets/favicon.png';
+import logo from '@/assets/logo_expanded.png';
+import { Button } from '@/components/ui/button';
+import { useAuth } from '@/hooks/use-auth';
+import { cn } from '@/lib/utils';
 
 interface AppHeaderProps {
   className?: string;
@@ -18,8 +18,8 @@ export function AppHeader({
   return (
     <header
       className={cn(
-        "relative flex items-center justify-between bg-primary p-4 px-4 md:px-8",
-        className
+        'relative flex items-center justify-between bg-primary p-4 px-4 md:px-8',
+        className,
       )}
     >
       {/* Logo on the left */}

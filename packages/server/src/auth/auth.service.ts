@@ -1,18 +1,18 @@
 import {
   Injectable,
-  UnauthorizedException,
   InternalServerErrorException,
   Logger,
+  UnauthorizedException,
 } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
-import { LoginDto } from './dto/login.dto';
-import { RegisterDto } from './dto/register.dto';
-import { JwtService } from '@nestjs/jwt';
-import { Users } from '../users/users.entity';
-import { QueryFailedError, Repository } from 'typeorm';
+import type { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEmailAlreadyExistsException } from './exceptions/user-email-already-exists.exception';
+import * as bcrypt from 'bcrypt';
+import { QueryFailedError, type Repository } from 'typeorm';
 import { MysqlErrorCode } from '../common/mysql-error-codes';
+import { Users } from '../users/users.entity';
+import type { LoginDto } from './dto/login.dto';
+import type { RegisterDto } from './dto/register.dto';
+import { UserEmailAlreadyExistsException } from './exceptions/user-email-already-exists.exception';
 
 @Injectable()
 export class AuthService {

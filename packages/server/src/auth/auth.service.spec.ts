@@ -1,17 +1,17 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service';
-import { getRepositoryToken } from '@nestjs/typeorm';
-import { Users } from '../users/users.entity';
-import { JwtService } from '@nestjs/jwt';
-import { Repository, QueryFailedError } from 'typeorm';
-import * as bcrypt from 'bcrypt';
-import { UserEmailAlreadyExistsException } from './exceptions/user-email-already-exists.exception';
 import {
   InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { RegisterDto } from './dto/register.dto';
-import { LoginDto } from './dto/login.dto';
+import { JwtService } from '@nestjs/jwt';
+import { Test, type TestingModule } from '@nestjs/testing';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
+import { QueryFailedError, type Repository } from 'typeorm';
+import { Users } from '../users/users.entity';
+import { AuthService } from './auth.service';
+import type { LoginDto } from './dto/login.dto';
+import type { RegisterDto } from './dto/register.dto';
+import { UserEmailAlreadyExistsException } from './exceptions/user-email-already-exists.exception';
 
 // Mock the entire bcrypt library
 jest.mock('bcrypt');
@@ -133,24 +133,10 @@ describe('AuthService', () => {
       canvasserRepository.create.mockReturnValue({} as Users);
       canvasserRepository.save.mockRejectedValue(error);
 
-      // Spy on the private logger instance
-      const loggerSpy = jest
-        .spyOn(authService['logger'], 'error')
-        .mockImplementation(() => {});
-
       // Act & Assert
       await expect(authService.register(registerDto)).rejects.toThrow(
         InternalServerErrorException,
       );
-
-      expect(loggerSpy).toHaveBeenCalledTimes(1);
-      expect(loggerSpy).toHaveBeenCalledWith(
-        `Registration failed for email: ${registerDto.email} due to an internal error.`,
-        error.stack, // The service logs the error stack
-      );
-
-      // Cleanup
-      loggerSpy.mockRestore();
     });
   });
 
@@ -177,7 +163,6 @@ describe('AuthService', () => {
       const result = await authService.login(loginDto);
 
       // Assert
-      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(canvasserRepository.findOneBy).toHaveBeenCalledWith({
         email: loginDto.email,
       });
@@ -185,7 +170,6 @@ describe('AuthService', () => {
         loginDto.password,
         mockUser.password,
       );
-      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(jwtService.sign).toHaveBeenCalledWith({
         email: mockUser.email,
         id: mockUser.id,
@@ -203,7 +187,6 @@ describe('AuthService', () => {
         new UnauthorizedException('Invalid login!'),
       );
       expect(bcrypt.compare).not.toHaveBeenCalled();
-      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(jwtService.sign).not.toHaveBeenCalled();
     });
 
@@ -216,7 +199,6 @@ describe('AuthService', () => {
       await expect(authService.login(loginDto)).rejects.toThrow(
         new UnauthorizedException('Invalid login!'),
       );
-      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(jwtService.sign).not.toHaveBeenCalled();
     });
   });

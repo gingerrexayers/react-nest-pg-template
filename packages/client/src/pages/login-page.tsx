@@ -1,19 +1,13 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
-import { useAuth } from "@/hooks/use-auth";
-import api from "@/api";
-import { AppHeader } from "@/components/layout/app-header";
-import { Button } from "@/components/ui/button";
+import api from '@/api';
+import { AppHeader } from '@/components/layout/app-header';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
   Form,
   FormControl,
@@ -21,12 +15,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useAuth } from '@/hooks/use-auth';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
+import { z } from 'zod';
 
 const formSchema = z.object({
-  email: z.string().email({ message: "Invalid email address." }),
-  password: z.string().min(1, { message: "Password is required." }),
+  email: z.string().email({ message: 'Invalid email address.' }),
+  password: z.string().min(1, { message: 'Password is required.' }),
 });
 
 export function LoginPage() {
@@ -35,23 +35,23 @@ export function LoginPage() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { email: "", password: "" },
-    mode: "onChange",
+    defaultValues: { email: '', password: '' },
+    mode: 'onChange',
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const response = await api.post<{ token: string }>("/auth/login", values);
+      const response = await api.post<{ token: string }>('/auth/login', values);
       login(response.data.token);
-      void navigate("/dashboard");
+      void navigate('/dashboard');
 
-      void toast.success("Login Successful", {
-        description: "Welcome back!",
+      void toast.success('Login Successful', {
+        description: 'Welcome back!',
       });
     } catch (error) {
       console.error(error);
-      void toast.error("Login Failed", {
-        description: "Invalid email or password. Please try again.",
+      void toast.error('Login Failed', {
+        description: 'Invalid email or password. Please try again.',
       });
     }
   }
@@ -117,12 +117,12 @@ export function LoginPage() {
                     form.formState.isSubmitting || !form.formState.isValid
                   }
                 >
-                  {form.formState.isSubmitting ? "Signing In..." : "Sign In"}
+                  {form.formState.isSubmitting ? 'Signing In...' : 'Sign In'}
                 </Button>
               </form>
             </Form>
             <div className="mt-4 text-center text-sm">
-              Don't have an account?{" "}
+              Don't have an account?{' '}
               <Link to="/register" className="underline">
                 Sign up
               </Link>

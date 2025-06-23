@@ -6,16 +6,11 @@
     "lib": ["ES2023"],
     "module": "NodeNext",
     "skipLibCheck": true,
-
-    /* Bundler mode */
     "moduleResolution": "NodeNext",
     "allowImportingTsExtensions": true,
     "emitDeclarationOnly": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-
-
-    /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

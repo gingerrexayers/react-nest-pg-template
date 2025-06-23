@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ type ThemeProviderProps = {
 export function ThemeProvider({ children }: ThemeProviderProps) {
   useEffect(() => {
     const root = window.document.documentElement;
-    root.classList.add("light");
+    root.classList.add('light');
   }, []);
 
   return <>{children}</>;

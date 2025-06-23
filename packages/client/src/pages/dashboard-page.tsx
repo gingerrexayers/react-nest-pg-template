@@ -1,5 +1,5 @@
-import { AppHeader } from "@/components/layout/app-header";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AppHeader } from '@/components/layout/app-header';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export function DashboardPage() {
   return (

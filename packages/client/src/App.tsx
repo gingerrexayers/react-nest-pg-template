@@ -1,9 +1,9 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { RootLayout } from "@/components/layout/root-layout";
-import { ProtectedRoute } from "@/components/protected-route";
-import { LoginPage } from "@/pages/login-page";
-import { RegisterPage } from "@/pages/register-page";
-import { DashboardPage } from "@/pages/dashboard-page";
+import { RootLayout } from '@/components/layout/root-layout';
+import { ProtectedRoute } from '@/components/protected-route';
+import { DashboardPage } from '@/pages/dashboard-page';
+import { LoginPage } from '@/pages/login-page';
+import { RegisterPage } from '@/pages/register-page';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (

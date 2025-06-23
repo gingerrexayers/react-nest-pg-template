@@ -1,5 +1,5 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "@/hooks/use-auth";
+import { useAuth } from '@/hooks/use-auth';
+import { Navigate, Outlet } from 'react-router-dom';
 
 export function ProtectedRoute() {
   const { isAuthenticated } = useAuth();

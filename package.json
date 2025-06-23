@@ -7,10 +7,16 @@
     "build:server": "pnpm --filter server build",
     "start:server": "node packages/server/dist/main",
     "build:client": "pnpm --filter client build",
-    "serve:client": "pnpm --filter client preview"
+    "serve:client": "pnpm --filter client preview",
+    "lint": "pnpm biome lint .",
+    "format": "pnpm biome format --write .",
+    "check": "pnpm biome check --write --unsafe ."
   },
   "keywords": [],
   "author": "Ginger Ayers",
   "license": "ISC",
-  "packageManager": "pnpm@10.11.0"
+  "packageManager": "pnpm@10.11.0",
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.3"
+  }
 }

@@ -1,10 +1,10 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing';
+import { validate } from 'class-validator';
+import type { Users } from '../users/users.entity';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
-import { Users } from '../users/users.entity';
-import { validate } from 'class-validator';
+import { RegisterDto } from './dto/register.dto';
 
 // Create a mock AuthService object
 // We define the type to get autocompletion for the service's methods.

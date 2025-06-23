@@ -1,18 +1,13 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
-import api from "@/api";
-import { AppHeader } from "@/components/layout/app-header";
-import { Button } from "@/components/ui/button";
+import api from '@/api';
+import { AppHeader } from '@/components/layout/app-header';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
   Form,
   FormControl,
@@ -20,15 +15,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
+import { z } from 'zod';
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Invalid email address." }),
+  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  email: z.string().email({ message: 'Invalid email address.' }),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters." }),
+    .min(8, { message: 'Password must be at least 8 characters.' }),
 });
 
 export function RegisterPage() {
@@ -36,36 +36,36 @@ export function RegisterPage() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { name: "", email: "", password: "" },
-    mode: "onChange", // Validate on input change for immediate feedback
+    defaultValues: { name: '', email: '', password: '' },
+    mode: 'onChange', // Validate on input change for immediate feedback
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await api.post("/auth/register", values);
+      await api.post('/auth/register', values);
 
-      void toast.success("Registration Successful", {
-        description: "You can now log in with your credentials.",
+      void toast.success('Registration Successful', {
+        description: 'You can now log in with your credentials.',
       });
-      await navigate("/login");
+      await navigate('/login');
     } catch (error: unknown) {
       void console.error(error);
-      let errorMessage = "An unexpected error occurred. Please try again.";
+      let errorMessage = 'An unexpected error occurred. Please try again.';
       const errorResponseData = (
         error as { response?: { data?: { message?: string | string[] } } }
       )?.response?.data;
 
-      if (errorResponseData && errorResponseData.message) {
+      if (errorResponseData?.message) {
         if (Array.isArray(errorResponseData.message)) {
           // Join array of messages for display
-          errorMessage = errorResponseData.message.join("; \n");
+          errorMessage = errorResponseData.message.join('; \n');
         } else {
           // Use single message string
           errorMessage = errorResponseData.message;
         }
       }
 
-      void toast.error("Registration Failed", {
+      void toast.error('Registration Failed', {
         description: errorMessage,
       });
     }
@@ -148,13 +148,13 @@ export function RegisterPage() {
                   }
                 >
                   {form.formState.isSubmitting
-                    ? "Creating Account..."
-                    : "Create Account"}
+                    ? 'Creating Account...'
+                    : 'Create Account'}
                 </Button>
               </form>
             </Form>
             <div className="mt-4 text-center text-sm">
-              Already have an account?{" "}
+              Already have an account?{' '}
               <Link to="/login" className="underline">
                 Sign in
               </Link>

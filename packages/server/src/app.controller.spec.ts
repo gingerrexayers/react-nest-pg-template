@@ -1,7 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
-import { DataSource } from 'typeorm';
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { Test, type TestingModule } from '@nestjs/testing';
+import { DataSource } from 'typeorm';
+import { AppController } from './app.controller';
 
 // Create a mock DataSource object. We only need to mock the `query` method.
 const mockDataSource = {
