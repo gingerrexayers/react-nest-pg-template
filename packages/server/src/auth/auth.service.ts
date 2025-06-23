@@ -1,18 +1,18 @@
 import {
   Injectable,
+  UnauthorizedException,
   InternalServerErrorException,
   Logger,
-  UnauthorizedException,
 } from '@nestjs/common';
-import type { JwtService } from '@nestjs/jwt';
-import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { QueryFailedError, type Repository } from 'typeorm';
-import { MysqlErrorCode } from '../common/mysql-error-codes';
+import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from './dto/register.dto';
+import { JwtService } from '@nestjs/jwt';
 import { Users } from '../users/users.entity';
-import type { LoginDto } from './dto/login.dto';
-import type { RegisterDto } from './dto/register.dto';
+import { QueryFailedError, Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 import { UserEmailAlreadyExistsException } from './exceptions/user-email-already-exists.exception';
+import { MysqlErrorCode } from '../common/mysql-error-codes';
 
 @Injectable()
 export class AuthService {
@@ -43,7 +43,9 @@ export class AuthService {
     return { token };
   }
 
-  async register(registerDto: RegisterDto): Promise<Omit<Users, 'password'>> {
+  async register(
+    registerDto: RegisterDto,
+  ): Promise<Omit<Users, 'password'>> {
     this.logger.log(`Registration attempt for email: ${registerDto.email}`);
     const { name, email, password } = registerDto;
 
